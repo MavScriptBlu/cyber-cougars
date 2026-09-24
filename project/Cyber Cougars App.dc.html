@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+button{font-family:inherit}
+input::placeholder{color:#8c8385}
+::-webkit-scrollbar{display:none}
+a{color:#82142c}
+a:hover{color:#5c0e1f}
+</style>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#272324"></rect><circle cx="100" cy="80" r="36" fill="#82142c"></circle><text x="100" y="90" font-family="sans-serif" font-size="30" font-weight="800" fill="#ffffff" text-anchor="middle">CC</text><text x="100" y="150" font-family="sans-serif" font-size="16" font-weight="700" fill="#fdb71a" text-anchor="middle">CYBER COUGARS</text></svg></template>
+</helmet>
+<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#e5e1dc;padding:40px;box-sizing:border-box;font-family:'Montserrat','Gotham',system-ui,sans-serif">
+<x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" hint-size="402,874">
+<div style="height:100%;display:flex;flex-direction:column;position:relative;background:#f4f2f0;font-family:'Montserrat','Gotham',system-ui,sans-serif">
+
+<div style="flex:1 1 auto;min-height:0;overflow:auto;background:#f4f2f0">
+
+<sc-if value="{{showHome}}" hint-placeholder-val="{{true}}">
+<div style="display:flex;flex-direction:column">
+  <div style="background:#272324;padding:54px 24px 28px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center">
+    <img src="./assets/cyber-cougars-badge.png" alt="Cyber Cougars badge" style="width:64px;height:64px;border-radius:50%"></img>
+    <div style="font-weight:800;font-size:22px;line-height:26px;letter-spacing:0.03em;color:#ffffff;text-transform:uppercase;white-space:nowrap">Cyber Cougars</div>
+    <div style="font-weight:700;font-size:11px;line-height:16px;letter-spacing:0.18em;color:#fdb71a;text-transform:uppercase;white-space:nowrap">Mid-State Technical College</div>
+  </div>
+
+  <div style="margin:20px 16px 0;background:#fbeaea;border-left:3px solid #82142c;border-radius:6px;padding:16px">
+    <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;color:#82142c;text-transform:uppercase;margin-bottom:6px">This is a student-run club</div>
+    <div style="font-size:15px;line-height:24px;color:#231f20"><strong>The students run the Cyber Cougars.</strong> The advisor advises.</div>
+  </div>
+
+  <sc-if value="{{notJoined}}" hint-placeholder-val="{{true}}">
+    <div style="margin:16px 16px 0">
+      <button onClick="{{openOnboarding}}" style="width:100%;box-sizing:border-box;background:#82142c;color:#ffffff;border:none;border-radius:3px;padding:12px 16px;font-weight:600;font-size:14px;cursor:pointer">Become a member</button>
+    </div>
+  </sc-if>
+  <sc-if value="{{joined}}" hint-placeholder-val="{{false}}">
+    <div style="margin:16px 16px 0;display:flex;align-items:center;gap:8px;background:#ffffff;border-radius:6px;padding:12px 16px;border:1px solid #e2dcda;box-sizing:border-box">
+      <span style="width:8px;height:8px;border-radius:50%;background:#82142c;flex:none"></span>
+      <span style="font-size:14px;font-weight:600;color:#231f20">You're a member</span>
+    </div>
+  </sc-if>
+
+  <div style="margin:28px 16px 0">
+    <div style="font-weight:700;font-size:20px;line-height:26px;color:#231f20;margin-bottom:12px">Next up</div>
+    <div onClick="{{nextEvent.onOpen}}" style="background:#ffffff;border-radius:6px;border-left:3px solid #82142c;padding:16px;cursor:pointer;display:flex;flex-direction:column;gap:6px">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="background:#82142c;color:#ffffff;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px">{{nextEvent.day}} {{nextEvent.dateNum}} {{nextEvent.month}}</span>
+        <span style="font-size:12px;color:#5e5759">{{nextEvent.time}}</span>
+      </div>
+      <div style="font-size:18px;line-height:26px;font-weight:700;color:#231f20">{{nextEvent.title}}</div>
+      <div style="font-size:12px;color:#5e5759">{{nextEvent.location}}</div>
+    </div>
+  </div>
+
+  <div style="margin:28px 16px 32px">
+    <div style="font-weight:700;font-size:20px;line-height:26px;color:#231f20;margin-bottom:12px">What's on</div>
+    <div style="display:flex;flex-direction:column;gap:1px;background:#e2dcda;border-radius:6px;overflow:hidden">
+      <sc-for list="{{announcements}}" as="a" hint-placeholder-count="3">
+        <div style="background:#ffffff;padding:14px 16px;display:flex;flex-direction:column;gap:4px">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+            <span style="font-size:11px;font-weight:700;letter-spacing:0.12em;color:#82142c;text-transform:uppercase">Announcement</span>
+            <span style="font-size:12px;color:#5e5759">{{a.date}}</span>
+          </div>
+          <div style="font-size:16px;font-weight:700;color:#231f20">{{a.title}}</div>
+          <div style="font-size:14px;line-height:22px;color:#5e5759">{{a.body}}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{showEvents}}" hint-placeholder-val="{{false}}">
+<div style="display:flex;flex-direction:column;padding-bottom:16px">
+  <div style="padding:54px 16px 8px">
+    <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;color:#82142c;text-transform:uppercase;margin-bottom:4px">September–October 2026</div>
+    <div style="font-weight:700;font-size:26px;line-height:32px;color:#231f20">Events</div>
+  </div>
+  <div style="margin:12px 16px;display:flex;flex-direction:column;gap:1px;background:#e2dcda;border-radius:6px;overflow:hidden">
+    <sc-for list="{{events}}" as="e" hint-placeholder-count="4">
+      <div onClick="{{e.onOpen}}" style="background:#ffffff;padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer">
+        <div style="flex:none;width:40px;text-align:center">
+          <div style="font-size:10px;font-weight:700;color:#82142c;text-transform:uppercase;letter-spacing:0.04em">{{e.month}}</div>
+          <div style="font-size:20px;font-weight:800;color:#231f20;line-height:22px">{{e.dateNum}}</div>
+        </div>
+        <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+          <div style="font-size:15px;font-weight:700;color:#231f20">{{e.title}}</div>
+          <div style="font-size:12px;color:#5e5759">{{e.day}} · {{e.time}} · {{e.location}}</div>
+          <sc-if value="{{e.rsvped}}" hint-placeholder-val="{{false}}">
+            <div style="font-size:11px;font-weight:700;color:#82142c;margin-top:2px">You're in</div>
+          </sc-if>
+        </div>
+        <svg width="8" height="14" viewBox="0 0 8 14" style="flex:none"><path d="M1 1l6 6-6 6" stroke="#8c8385" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{showMembers}}" hint-placeholder-val="{{false}}">
+<div style="display:flex;flex-direction:column;padding-bottom:16px">
+  <div style="padding:54px 16px 8px">
+    <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;color:#82142c;text-transform:uppercase;margin-bottom:4px">Officers &amp; members</div>
+    <div style="font-weight:700;font-size:26px;line-height:32px;color:#231f20">Members</div>
+  </div>
+  <div style="margin:12px 16px;display:flex;flex-direction:column;gap:1px;background:#e2dcda;border-radius:6px;overflow:hidden">
+    <sc-for list="{{members}}" as="m" hint-placeholder-count="6">
+      <div onClick="{{m.onOpen}}" style="background:#ffffff;padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer">
+        <div style="width:40px;height:40px;border-radius:50%;background:#fbeaea;border:1.5px solid #82142c;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#82142c;flex:none">{{m.initials}}</div>
+        <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+          <div style="font-size:15px;font-weight:700;color:#231f20">{{m.name}}</div>
+          <div style="font-size:12px;color:#5e5759">{{m.role}}</div>
+        </div>
+        <svg width="8" height="14" viewBox="0 0 8 14" style="flex:none"><path d="M1 1l6 6-6 6" stroke="#8c8385" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{showMore}}" hint-placeholder-val="{{false}}">
+<div style="display:flex;flex-direction:column;padding-bottom:16px">
+  <div style="padding:54px 16px 8px">
+    <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;color:#82142c;text-transform:uppercase;margin-bottom:4px">Links &amp; resources</div>
+    <div style="font-weight:700;font-size:26px;line-height:32px;color:#231f20">More</div>
+  </div>
+  <div style="margin:12px 16px;display:flex;flex-direction:column;gap:1px;background:#e2dcda;border-radius:6px;overflow:hidden">
+    <sc-for list="{{resources}}" as="r" hint-placeholder-count="5">
+      <div style="background:#ffffff;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <div style="font-size:15px;font-weight:600;color:#231f20">{{r.label}}</div>
+          <div style="font-size:12px;color:#5e5759">{{r.detail}}</div>
+        </div>
+        <div style="font-size:14px;color:#82142c;flex:none">↗</div>
+      </div>
+    </sc-for>
+  </div>
+
+  <sc-if value="{{notJoined}}" hint-placeholder-val="{{true}}">
+    <div style="margin:20px 16px 0">
+      <button onClick="{{openOnboarding}}" style="width:100%;box-sizing:border-box;background:#82142c;color:#ffffff;border:none;border-radius:3px;padding:12px 16px;font-weight:600;font-size:14px;cursor:pointer">Join the club</button>
+    </div>
+  </sc-if>
+  <sc-if value="{{joined}}" hint-placeholder-val="{{false}}">
+    <div style="margin:20px 16px 0;display:flex;align-items:center;gap:8px;background:#ffffff;border-radius:6px;padding:12px 16px;border:1px solid #e2dcda;box-sizing:border-box">
+      <span style="width:8px;height:8px;border-radius:50%;background:#82142c;flex:none"></span>
+      <span style="font-size:14px;font-weight:600;color:#231f20">You're a member</span>
+    </div>
+  </sc-if>
+
+  <div style="margin:32px 16px 0;font-size:12px;line-height:18px;color:#5e5759">Cyber Cougars is a Mid-State Technical College student club.</div>
+</div>
+</sc-if>
+
+<sc-if value="{{showEventDetail}}" hint-placeholder-val="{{false}}">
+<div style="display:flex;flex-direction:column;min-height:100%">
+  <div style="display:flex;align-items:center;gap:12px;padding:54px 16px 12px;border-bottom:1px solid #e2dcda;background:#ffffff">
+    <button onClick="{{closeView}}" style="background:none;border:none;padding:4px;cursor:pointer;display:flex;align-items:center">
+      <svg width="10" height="16" viewBox="0 0 10 16"><path d="M8 1L1 8l7 7" stroke="#231f20" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+    </button>
+    <div style="font-size:14px;font-weight:600;color:#5e5759">Events</div>
+  </div>
+  <div style="padding:20px 16px 32px;display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:center;gap:8px">
+      <span style="background:#82142c;color:#ffffff;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px">{{currentEvent.day}} {{currentEvent.dateNum}} {{currentEvent.month}}</span>
+      <span style="font-size:12px;color:#5e5759">{{currentEvent.time}}</span>
+    </div>
+    <div style="font-weight:700;font-size:24px;line-height:30px;color:#231f20">{{currentEvent.title}}</div>
+    <div style="font-size:14px;color:#5e5759">{{currentEvent.location}}</div>
+    <div style="height:1px;background:#e2dcda"></div>
+    <div style="font-size:15px;line-height:24px;color:#231f20">{{currentEvent.desc}}</div>
+
+    <sc-if value="{{eventRsvped}}" hint-placeholder-val="{{false}}">
+      <div style="display:flex;align-items:center;gap:8px;background:#fbeaea;border-left:3px solid #82142c;border-radius:6px;padding:14px 16px">
+        <span style="font-size:14px;font-weight:600;color:#82142c">You're in — see you there.</span>
+      </div>
+    </sc-if>
+    <sc-if value="{{eventNotRsvped}}" hint-placeholder-val="{{true}}">
+      <button onClick="{{openRsvpSheetForCurrent}}" style="width:100%;box-sizing:border-box;background:#82142c;color:#ffffff;border:none;border-radius:3px;padding:12px 16px;font-weight:600;font-size:14px;cursor:pointer">RSVP</button>
+    </sc-if>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{showOnboarding}}" hint-placeholder-val="{{false}}">
+<div style="display:flex;flex-direction:column;min-height:100%">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:54px 16px 0">
+    <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;color:#82142c;text-transform:uppercase">Join the club</div>
+    <button onClick="{{closeOnboarding}}" style="background:none;border:none;font-size:22px;color:#5e5759;cursor:pointer;line-height:1;padding:4px">×</button>
+  </div>
+
+  <sc-if value="{{obStepIsDone}}" hint-placeholder-val="{{false}}"></sc-if>
+  <sc-if value="{{obNotDone}}" hint-placeholder-val="{{true}}">
+    <div style="display:flex;gap:6px;padding:18px 16px 0">
+      <div style="flex:1;height:4px;border-radius:999px;background:{{dot0Bg}}"></div>
+      <div style="flex:1;height:4px;border-radius:999px;background:{{dot1Bg}}"></div>
+      <div style="flex:1;height:4px;border-radius:999px;background:{{dot2Bg}}"></div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{obStepIsInfo}}" hint-placeholder-val="{{true}}">
+    <div style="padding:24px 16px;display:flex;flex-direction:column;gap:16px">
+      <div>
+        <div style="font-weight:700;font-size:24px;line-height:30px;color:#231f20;margin-bottom:6px">Tell us about you</div>
+        <div style="font-size:14px;line-height:22px;color:#5e5759">Just enough to add you to the roster.</div>
+      </div>
+      <input value="{{obName}}" onChange="{{setObName}}" placeholder="Full name" style="border:1px solid #8c8385;border-radius:3px;padding:12px;font-size:15px;color:#231f20;outline:none;width:100%;box-sizing:border-box;font-family:inherit"></input>
+      <input value="{{obEmail}}" onChange="{{setObEmail}}" placeholder="Email address" style="border:1px solid #8c8385;border-radius:3px;padding:12px;font-size:15px;color:#231f20;outline:none;width:100%;box-sizing:border-box;font-family:inherit"></input>
+      <button onClick="{{goObStep1}}" disabled="{{obInfoInvalid}}" style="width:100%;box-sizing:border-box;background:#82142c;color:#ffffff;border:none;border-radius:3px;padding:12px 16px;font-weight:600;font-size:14px;cursor:pointer;opacity:{{obContinueOpacity}}">Continue</button>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{obStepIsInterests}}" hint-placeholder-val="{{false}}">
+    <div style="padding:24px 16px;display:flex;flex-direction:column;gap:16px">
+      <div>
+        <div style="font-weight:700;font-size:24px;line-height:30px;color:#231f20;margin-bottom:6px">What are you into?</div>
+        <div style="font-size:14px;line-height:22px;color:#5e5759">Pick as many as you like.</div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <sc-for list="{{interestChips}}" as="c" hint-placeholder-count="6">
+          <button onClick="{{c.onToggle}}" style="background:{{c.bg}};color:{{c.fg}};border:1.5px solid {{c.border}};border-radius:999px;padding:10px 14px;font-size:13px;font-weight:600;cursor:pointer">{{c.label}}</button>
+        </sc-for>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <button onClick="{{goObStep0}}" style="flex:1;background:none;color:#82142c;border:1px solid #8c8385;border-radius:3px;padding:12px 16px;font-weight:600;font-size:14px;cursor:pointer">Back</button>
+        <button onClick="{{goObStep2}}" style="flex:1;background:#82142c;color:#ffffff;border:none;border-radius:3px;padding:12px 16px;font-weight:600;font-size:14px;cursor:pointer">Continue</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{obStepIsConfirm}}" hint-placeholder-val="{{false}}">
+    <div style="padding:24px 16px;display:flex;flex-direction:column;gap:16px">
+      <div>
+        <div style="font-weight:700;font-size:24px;line-height:30px;color:#231f20;margin-bottom:6px">Confirm</div>
+        <div style="font-size:14px;line-height:22px;color:#5e5759">Check the roster entry before you join.</div>
+      </div>
+      <div style="background:#ffffff;border:1px solid #e2dcda;border-radius:6px;padding:16px;display:flex;flex-direction:column;gap:10px">
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;color:#5e5759;text-transform:uppercase;margin-bottom:2px">Name</div>
+          <div style="font-size:15px;color:#231f20">{{obName}}</div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;color:#5e5759;text-transform:uppercase;margin-bottom:2px">Email</div>
+          <div style="font-size:15px;color:#231f20">{{obEmail}}</div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;color:#5e5759;text-transform:uppercase;margin-bottom:2px">Interests</div>
+          <div style="font-size:15px;color:#231f20">{{interestsJoined}}</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <button onClick="{{goObStep1}}" style="flex:1;background:none;color:#82142c;border:1px solid #8c8385;border-radius:3px;padding:12px 16px;font-weight:600;font-size:14px;cursor:pointer">Back</button>
+        <button onClick="{{finishOnboarding}}" style="flex:2;background:#82142c;color:#ffffff;border:none;border-radius:3px;padding:12px 16px;font-weight:600;font-size:14px;cursor:pointer">Join the Cyber Cougars</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{obStepIsDone}}" hint-placeholder-val="{{false}}">
+    <div style="padding:16px 24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px">
+      <div style="width:64px;height:64px;border-radius:50%;background:#82142c;display:flex;align-items:center;justify-content:center;margin-top:24px">
+        <svg width="28" height="22" viewBox="0 0 28 22"><path d="M2 11l8 8L26 2" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </div>
+      <div style="font-weight:700;font-size:24px;line-height:30px;color:#231f20">You're in!</div>
+      <div style="font-size:15px;line-height:24px;color:#5e5759">Welcome to the Cyber Cougars. Watch for the weekly Teams invite and say hi at the next meeting.</div>
+      <button onClick="{{closeOnboarding}}" style="width:100%;box-sizing:border-box;background:#82142c;color:#ffffff;border:none;border-radius:3px;padding:12px 16px;font-weight:600;font-size:14px;cursor:pointer;margin-top:8px">Done</button>
+    </div>
+  </sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{showMemberDetail}}" hint-placeholder-val="{{false}}">
+<div style="display:flex;flex-direction:column;min-height:100%">
+  <div style="display:flex;align-items:center;gap:12px;padding:54px 16px 12px;border-bottom:1px solid #e2dcda;background:#ffffff">
+    <button onClick="{{closeView}}" style="background:none;border:none;padding:4px;cursor:pointer;display:flex;align-items:center">
+      <svg width="10" height="16" viewBox="0 0 10 16"><path d="M8 1L1 8l7 7" stroke="#231f20" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+    </button>
+    <div style="font-size:14px;font-weight:600;color:#5e5759">Members</div>
+  </div>
+  <div style="margin:32px 24px;background:#ffffff;border:2px solid #82142c;border-radius:12px;padding:28px 20px;display:flex;flex-direction:column;align-items:center;gap:10px">
+    <div style="width:72px;height:72px;border-radius:50%;background:#fbeaea;border:2px solid #82142c;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:#82142c">{{currentMember.initials}}</div>
+    <div style="font-weight:700;font-size:20px;color:#231f20">{{currentMember.name}}</div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;color:#82142c;text-transform:uppercase">{{currentMember.role}}</div>
+    <div style="height:1px;width:100%;background:#e2dcda;margin:8px 0"></div>
+    <div style="font-size:13px;color:#5e5759">Member since {{currentMember.since}}</div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;color:#5e5759;text-transform:uppercase;margin-top:6px">Cyber Cougars · Mid-State</div>
+  </div>
+</div>
+</sc-if>
+
+</div>
+
+<sc-if value="{{showTabBar}}" hint-placeholder-val="{{true}}">
+<div style="flex:none;display:flex;align-items:center;justify-content:space-around;height:76px;padding-bottom:18px;background:#ffffff;border-top:1px solid #e2dcda">
+  <button onClick="{{goHome}}" style="display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:none;padding:6px 12px;cursor:pointer">
+    <span style="width:7px;height:7px;border-radius:50%;background:{{homeTabColor}}"></span>
+    <span style="font-size:11px;font-weight:600;color:{{homeTabColor}}">Home</span>
+  </button>
+  <button onClick="{{goEvents}}" style="display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:none;padding:6px 12px;cursor:pointer">
+    <span style="width:7px;height:7px;border-radius:50%;background:{{eventsTabColor}}"></span>
+    <span style="font-size:11px;font-weight:600;color:{{eventsTabColor}}">Events</span>
+  </button>
+  <button onClick="{{goMembers}}" style="display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:none;padding:6px 12px;cursor:pointer">
+    <span style="width:7px;height:7px;border-radius:50%;background:{{membersTabColor}}"></span>
+    <span style="font-size:11px;font-weight:600;color:{{membersTabColor}}">Members</span>
+  </button>
+  <button onClick="{{goMore}}" style="display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:none;padding:6px 12px;cursor:pointer">
+    <span style="width:7px;height:7px;border-radius:50%;background:{{moreTabColor}}"></span>
+    <span style="font-size:11px;font-weight:600;color:{{moreTabColor}}">More</span>
+  </button>
+</div>
+</sc-if>
+
+<sc-if value="{{showSheet}}" hint-placeholder-val="{{false}}">
+  <div style="position:absolute;inset:0;background:rgba(35,31,32,0.4);display:flex;align-items:flex-end;z-index:100">
+    <div style="width:100%;background:#ffffff;border-radius:16px 16px 0 0;padding:20px 20px 32px;display:flex;flex-direction:column;gap:14px;box-sizing:border-box">
+      <div style="width:36px;height:4px;background:#e2dcda;border-radius:999px;margin:0 auto 4px"></div>
+      <div style="font-weight:700;font-size:18px;color:#231f20">Confirm your spot</div>
+      <div style="font-size:14px;color:#5e5759">{{sheetEvent.title}} · {{sheetEvent.day}} {{sheetEvent.dateNum}} {{sheetEvent.month}}, {{sheetEvent.time}}</div>
+      <button onClick="{{confirmRsvpForSheet}}" style="width:100%;box-sizing:border-box;background:#82142c;color:#ffffff;border:none;border-radius:3px;padding:12px 16px;font-weight:600;font-size:14px;cursor:pointer">Confirm RSVP</button>
+      <button onClick="{{closeRsvpSheet}}" style="width:100%;box-sizing:border-box;background:none;color:#82142c;border:1px solid #8c8385;border-radius:3px;padding:12px 16px;font-weight:600;font-size:14px;cursor:pointer">Cancel</button>
+    </div>
+  </div>
+</sc-if>
+
+</div>
+</x-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;startTab&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;default&quot;: &quot;home&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;home&quot;, &quot;events&quot;, &quot;members&quot;, &quot;more&quot;], &quot;section&quot;: &quot;Behavior&quot;},
+  &quot;startJoined&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Behavior&quot;}
+}">
+class Component extends DCLogic {
+  events = [
+    { id: 1, day: 'Thu', dateNum: '24', month: 'Sep', time: '12:00 PM', title: 'Weekly meeting — CTF prep', location: 'Tech 214', desc: "Practice problems from last week's capture-the-flag, plus a look at the qualifier bracket for Tech Con." },
+    { id: 2, day: 'Thu', dateNum: '1', month: 'Oct', time: '6:00 PM', title: 'Activity night — gaming, digital and analog', location: 'Student Commons', desc: 'Bring a controller or a deck. Snacks on the club.' },
+    { id: 3, day: 'Sat', dateNum: '10', month: 'Oct', time: '9:00 AM', title: 'Tech Con 2.1 — volunteers wanted', location: 'Main Hall', desc: 'Set-up, registration desk and teardown shifts. Free T-shirt and lunch for volunteers.' },
+    { id: 4, day: 'Thu', dateNum: '15', month: 'Oct', time: '12:00 PM', title: 'Guest talk: intro to networking', location: 'Tech 214', desc: 'An alum from the network ops team walks through subnets, routing and a home-lab setup.' },
+  ];
+  members = [
+    { id: 1, initials: 'AA', name: 'Dr. Alvarez', role: 'Advisor', since: 'Aug 2023' },
+    { id: 2, initials: 'JL', name: 'Jordan Lee', role: 'President', since: 'Aug 2024' },
+    { id: 3, initials: 'PN', name: 'Priya Nair', role: 'Vice President', since: 'Jan 2025' },
+    { id: 4, initials: 'SC', name: 'Sam Cortez', role: 'Treasurer', since: 'Aug 2025' },
+    { id: 5, initials: 'RC', name: 'Riley Chen', role: 'Member', since: 'Sep 2025' },
+    { id: 6, initials: 'DP', name: 'Devon Park', role: 'Member', since: 'Sep 2026' },
+  ];
+  announcements = [
+    { id: 1, title: 'Tech Con 2.1 needs volunteers', date: 'Sat 10 Oct', body: 'Sign up for a shift — set-up, registration or teardown. Free shirt and lunch either way.' },
+    { id: 2, title: 'Officer elections next month', date: 'Thu 5 Nov', body: 'President, VP and Treasurer seats are open. Nominate yourself or a friend at any meeting.' },
+    { id: 3, title: 'Teams server is live', date: 'Thu 17 Sep', body: 'Project channels, a homework-help thread and a bot that posts meeting reminders.' },
+  ];
+  resources = [
+    { id: 1, label: 'Join the meeting on Teams', detail: 'Weekly, Thursdays at noon' },
+    { id: 2, label: 'Teams', detail: 'Chat with the club' },
+    { id: 3, label: 'GitHub', detail: 'Cyber Cougars projects' },
+    { id: 4, label: 'Mid-State Teams background', detail: 'Download for your next call' },
+    { id: 5, label: 'Mid-State Technical College', detail: 'College website' },
+  ];
+  interestsList = ['Security', 'Web dev', 'Game dev', 'Robotics', 'Competitive programming', 'Networking'];
+
+  state = {
+    tab: 'home', view: null,
+    joined: false, rsvps: {},
+    showRsvpSheet: null,
+    obStep: 0, obName: '', obEmail: '', obInterests: [],
+  };
+
+  componentDidMount() {
+    const upd = {};
+    if (this.props.startTab) upd.tab = this.props.startTab;
+    if (this.props.startJoined) upd.joined = true;
+    if (Object.keys(upd).length) this.setState(upd);
+  }
+
+  goHome = () => this.setState({ tab: 'home', view: null });
+  goEvents = () => this.setState({ tab: 'events', view: null });
+  goMembers = () => this.setState({ tab: 'members', view: null });
+  goMore = () => this.setState({ tab: 'more', view: null });
+  openEvent = (id) => this.setState({ view: { name: 'event', id } });
+  openMember = (id) => this.setState({ view: { name: 'member', id } });
+  openOnboarding = () => this.setState({ view: { name: 'onboarding' }, obStep: 0 });
+  closeView = () => this.setState({ view: null, showRsvpSheet: null });
+  openRsvpSheet = (id) => this.setState({ showRsvpSheet: id });
+  closeRsvpSheet = () => this.setState({ showRsvpSheet: null });
+  confirmRsvp = (id) => this.setState((s) => ({ rsvps: { ...s.rsvps, [id]: true }, showRsvpSheet: null }));
+  toggleInterest = (tag) => this.setState((s) => ({
+    obInterests: s.obInterests.includes(tag) ? s.obInterests.filter((t) => t !== tag) : [...s.obInterests, tag],
+  }));
+  goObStep0 = () => this.setState({ obStep: 0 });
+  goObStep1 = () => this.setState({ obStep: 1 });
+  goObStep2 = () => this.setState({ obStep: 2 });
+  setObName = (e) => this.setState({ obName: e.target.value });
+  setObEmail = (e) => this.setState({ obEmail: e.target.value });
+  finishOnboarding = () => this.setState({ joined: true, obStep: 3 });
+  closeOnboarding = () => this.setState({ view: null, obStep: 0, obName: '', obEmail: '', obInterests: [] });
+
+  renderVals() {
+    const { tab, view, joined, rsvps, showRsvpSheet, obStep, obName, obEmail, obInterests } = this.state;
+    const noView = view === null;
+
+    const events = this.events.map((e) => ({
+      ...e,
+      rsvped: !!rsvps[e.id],
+      onOpen: () => this.openEvent(e.id),
+    }));
+    const members = this.members.map((m) => ({ ...m, onOpen: () => this.openMember(m.id) }));
+
+    const currentEvent = view && view.name === 'event' ? events.find((e) => e.id === view.id) : null;
+    const currentMember = view && view.name === 'member' ? members.find((m) => m.id === view.id) : null;
+    const sheetEvent = showRsvpSheet ? events.find((e) => e.id === showRsvpSheet) : null;
+
+    const interestChips = this.interestsList.map((label) => {
+      const selected = obInterests.includes(label);
+      return {
+        label,
+        bg: selected ? '#82142c' : '#ffffff',
+        fg: selected ? '#ffffff' : '#231f20',
+        border: selected ? '#82142c' : '#8c8385',
+        onToggle: () => this.toggleInterest(label),
+      };
+    });
+
+    const obInfoValid = obName.trim().length > 0 && obEmail.includes('@');
+
+    return {
+      joined, notJoined: !joined,
+      showHome: noView && tab === 'home',
+      showEvents: noView && tab === 'events',
+      showMembers: noView && tab === 'members',
+      showMore: noView && tab === 'more',
+      showTabBar: noView,
+      showEventDetail: !!currentEvent,
+      showMemberDetail: !!currentMember,
+      showOnboarding: !!view && view.name === 'onboarding',
+      events, members, announcements: this.announcements, resources: this.resources,
+      nextEvent: events[0],
+      currentEvent, currentMember,
+      eventRsvped: currentEvent ? !!rsvps[currentEvent.id] : false,
+      eventNotRsvped: currentEvent ? !rsvps[currentEvent.id] : false,
+      sheetEvent, showSheet: !!sheetEvent,
+      obStep,
+      obStepIsInfo: obStep === 0, obStepIsInterests: obStep === 1, obStepIsConfirm: obStep === 2, obStepIsDone: obStep === 3,
+      obNotDone: obStep !== 3,
+      obName, obEmail, interestChips,
+      interestsJoined: obInterests.length ? obInterests.join(', ') : 'No preference yet',
+      obInfoInvalid: !obInfoValid,
+      obContinueOpacity: obInfoValid ? 1 : 0.45,
+      dot0Bg: obStep >= 0 ? '#82142c' : '#e2dcda',
+      dot1Bg: obStep >= 1 ? '#82142c' : '#e2dcda',
+      dot2Bg: obStep >= 2 ? '#82142c' : '#e2dcda',
+      homeTabColor: tab === 'home' && noView ? '#82142c' : '#5e5759',
+      eventsTabColor: tab === 'events' && noView ? '#82142c' : '#5e5759',
+      membersTabColor: tab === 'members' && noView ? '#82142c' : '#5e5759',
+      moreTabColor: tab === 'more' && noView ? '#82142c' : '#5e5759',
+      goHome: this.goHome, goEvents: this.goEvents, goMembers: this.goMembers, goMore: this.goMore,
+      closeView: this.closeView,
+      openOnboarding: this.openOnboarding, closeOnboarding: this.closeOnboarding,
+      openRsvpSheetForCurrent: currentEvent ? () => this.openRsvpSheet(currentEvent.id) : null,
+      confirmRsvpForSheet: sheetEvent ? () => this.confirmRsvp(sheetEvent.id) : null,
+      closeRsvpSheet: this.closeRsvpSheet,
+      goObStep0: this.goObStep0, goObStep1: this.goObStep1, goObStep2: this.goObStep2,
+      setObName: this.setObName, setObEmail: this.setObEmail,
+      finishOnboarding: this.finishOnboarding,
+    };
+  }
+}
+
+</script>
+</body>
+</html>
